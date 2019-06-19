@@ -5,6 +5,7 @@ import numpy as np
 import torch
 import torchvision.transforms as transforms
 from torch.utils.data import Dataset, DataLoader
+import os.path as osp
 
 class ImageSet(Dataset):
     def __init__(self, folder_path, resize=None):
@@ -12,7 +13,7 @@ class ImageSet(Dataset):
         self.images = []
         for file in files:
             if not os.path.isdir(file):
-                tmp_image = cv2.imread(folder_path+file)
+                tmp_image = cv2.imread(osp.join(folder_path,file))
                 self.images.append(tmp_image)
 
         if resize is not None:
